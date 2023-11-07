@@ -27,7 +27,7 @@ function askBot(event) {
   isRequestPending = true;
   submitTo = event instanceof Event ? event.submitter.value : null;
 
-  if (submitTo === "Stav" || submitTo === "Adam" || submitTo === "Nick") {
+  if (submitTo === "Conan" || submitTo === "Gourley" || submitTo === "Sona") {
     avatar = submitTo;
     disable = avatar;
   }
@@ -141,7 +141,7 @@ function askBot(event) {
       askBot.disabled = false;
       disabled = avatar;
 
-      if (avatar != "Stav" && avatar != "Adam" && avatar != "Nick") {
+      if (avatar != "Conan" && avatar != "Gourley" && avatar != "Sona") {
         avatar = "Guest";
 
         // Select all submit buttons
@@ -165,7 +165,7 @@ function askBot(event) {
         botImage.src = "/img/" + avatar + "/neutral.svg";
         botImage.classList.remove('laughing');
       }, laughLength);
-      if (submitTo === "Stav") {
+      if (submitTo === "Sona") {
 
         botImage.classList.add('laughing');
         laughTimer = setTimeout(() => {
@@ -198,9 +198,9 @@ function appendToTranscript(content, audioUrl) {
   const newContent = content.replace(/<br>/g, '\n'); // Replace <br> tags with newline characters
 
   // Highlight specific words
-  content = content.replace(/(Stav:)/g, '<span class="stav">$1</span>');
-  content = content.replace(/(Nick:)/g, '<span class="nick">$1</span>');
-  content = content.replace(/(Adam:)/g, '<span class="adam">$1</span>');
+  content = content.replace(/(Sona:)/g, '<span class="sona">$1</span>');
+  content = content.replace(/(Gourley:)/g, '<span class="gourley">$1</span>');
+  content = content.replace(/(Conan:)/g, '<span class="conan">$1</span>');
 
   // Generate unique IDs for the audio controls
   let audioControlsHtml = '';
@@ -332,7 +332,7 @@ function extractName(userMessage) {
 
 function updateAvatar(submit, id) {
   submit = document.getElementById(id).value
-  if (submit === "Stav" || submit === "Adam" || submit === "Nick") {
+  if (submit === "Sona" || submit === "Conan" || submit === "Gourley") {
     avatar = document.getElementById(id).value;
   }
   else if (submit === "All") {
@@ -621,214 +621,3 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-
-
-// document.getElementById('userInput').addEventListener('input', toggleResponseContainer);
-
-
-// document.getElementById('ttsButton').addEventListener('click', function() {
-//   var icon = document.getElementById('ttsIcon');
-//   if (icon.classList.contains('fa-volume-up')) {
-//     console.log('Voice is OFF');
-//     icon.classList.replace('fa-volume-up', 'fa-volume-mute'); // Change to muted icon
-//     // Perform actions to disable the voice feature
-//   } else {
-//     console.log('Voice is ON');
-//     icon.classList.replace('fa-volume-mute', 'fa-volume-up'); // Change to high volume icon
-//     // Perform actions to enable the voice feature
-//   }
-// });
-
-
-
-
-
-
-
-// document.getElementById('addButton').addEventListener('click', addButton);
-
-// function toggleCollapsible() {
-//   const collapsible = document.querySelector('.collapsible');
-//   const toggleIcon = document.getElementById('toggleIcon');
-//   const inputField = document.getElementById('buttonName');
-// }
-
-// document.getElementById('toggleButton').addEventListener('click', toggleCollapsible);
-// function toggleSettingsModal() {
-//   var modal = document.getElementById("settingsModal");
-//   if (modal.style.display === "none" || modal.style.display === "") {
-//     modal.style.display = "block";
-//   } else {
-//     modal.style.display = "none";
-//   }
-// }
-
-// Function to check if the bot image and the text overlap and adjust opacity
-// function checkOverlap() {
-//   const svgElement = document.getElementById("botImage");
-//   // const textElement = document.getElementById("botResponse");
-//   const svgRect = svgElement.getBoundingClientRect();
-//   const textRect = textElement.getBoundingClientRect();
-//   const overlap = !(svgRect.right < textRect.left || svgRect.left > textRect.right || svgRect.bottom < textRect.top || svgRect.top > textRect.bottom);
-//   svgElement.style.opacity = overlap ? 0.5 : 1;
-
-
-//   const responseContainer = document.getElementById('response-container');
-//   const rect = responseContainer.getBoundingClientRect();
-
-//   //   if (rect.top < 0 || rect.bottom > window.innerHeight) {
-//   //     // If it is, then add the response-container-fixed class, and remove the response-container class
-//   //     responseContainer.classList.add('response-container-fixed');
-//   //     responseContainer.classList.remove('response-container');
-//   //     console.log('Some part of botResponse is outside the viewport');
-//   // } else if (rect.top > 0 || rect.bottom > window.innerHeight) {
-//   //     // If responseContainer is fully visible AND it has the class response-container-fixed
-//   //     // then remove the response-container-fixed class and add back the response-container class
-//   //     responseContainer.classList.remove('response-container-fixed');
-//   //     responseContainer.classList.add('response-container');
-//   //     // console.log('botResponse is fully visible');
-//   // }
-// }
-
-// function captureAndDownload() {
-//   const element = document.getElementById('capture'); // The element you want to capture
-
-//   html2canvas(element).then(canvas => {
-//     canvas.toBlob(function(blob) {
-//       // For downloading the image
-//       let link = document.createElement('a');
-//       link.download = 'screenshot.png';
-//       link.href = URL.createObjectURL(blob);
-//       link.click();
-//       URL.revokeObjectURL(link.href);  // Recommended: Free up memory by revoking the Object URL after use.
-
-//       // For dcopying the image to the clipboard
-//       try {
-//         const item = new ClipboardItem({ 'image/png': blob });
-//         navigator.clipboard.write([item]).then(() => {
-//           showCopyMessage();
-//           console.log('Image copied to clipboard!');
-//         });
-//       } catch (error) {
-//         console.error('Failed to copy image to clipboard', error);
-//       }
-
-//     }, 'image/png');
-//   });
-// }
-// function showCopyMessage() {
-//   const msg = document.getElementById('copyMessage');
-//   msg.style.display = 'block';
-//   setTimeout(() => {
-//     msg.style.display = 'none';
-//   }, 3000);  // Message will fade out after 3 seconds.
-// }
-
-// async function captureAndDownload() {
-//   const element = document.getElementById('capture'); // The element you want to capture
-
-//   try {
-//     await html2canvas(element, { windowWidth: element.scrollWidth, windowHeight: element.scrollHeight });
-
-//     const canvas = await html2canvas(element);
-//     canvas.toBlob(function (blob) {
-//       // For downloading the image
-//       let link = document.createElement('a');
-//       link.download = 'screenshot.png';
-//       link.href = URL.createObjectURL(blob);
-//       link.click();
-//       URL.revokeObjectURL(link.href);  // Recommended: Free up memory by revoking the Object URL after use.
-
-//       // For copying the image to the clipboard
-//       try {
-//         const item = new ClipboardItem({ 'image/png': blob });
-//         navigator.clipboard.write([item]).then(() => {
-//           showCopyMessage();
-//           console.log('Image copied to clipboard!');
-//         });
-//       } catch (error) {
-//         console.error('Failed to copy image to clipboard', error);
-//       }
-//     }, 'image/png');
-//   } catch (error) {
-//     console.error('Error capturing screenshot:', error);
-//   }
-// }
-
-// async function captureAndShare() {
-//   const element = document.getElementById('capture');
-//   window.scrollTo(0, 0);
-
-//   try {
-//     await html2canvas(element, { windowWidth: element.scrollWidth, windowHeight: element.scrollHeight });
-
-//     const canvas = await html2canvas(element);
-//     canvas.toBlob(blob => {
-//       const file = new File([blob], 'screenshot.png', { type: 'image/png' });
-
-//       if (navigator.share) {
-//         navigator.share({
-//           title: 'My Screenshot',
-//           text: 'Check out my screenshot!',
-//           files: [file]
-//         }).catch(error => console.error('Sharing failed:', error));
-//       } else {
-//         // Fallback
-//         alert('Web Share API not supported in your browser.');
-//       }
-//     });
-//   } catch (error) {
-//     console.error('Error capturing screenshot:', error);
-//   }
-// }
-
-
-// Event listener to run checkOverlap function when the window resizes
-// window.addEventListener("resize", checkOverlap);
-// Functions to toggle and close settings modal
-
-
-//// Event listener to close the settings modal if clicked outside of it
-// window.onclick = function (event) {
-//   const modal = document.getElementById("settingsModal");
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Get references to the dropdown and the buttons
-//   var dropdown = document.getElementById('submitAs');
-//   var buttons = document.querySelectorAll('input[type="submit"][name="go"]');
-
-//   // Function to hide the button that matches the dropdown value
-//   function hideMatchingButton() {
-//     // Get the selected value from the dropdown
-//     var selectedValue = dropdown.value;
-
-//     // Loop through each button
-//     buttons.forEach(function (button) {
-//       // If the button's value matches the selected dropdown value, hide it. Otherwise, show it.
-//       if (button.value === selectedValue) {
-//         button.style.display = 'none';
-//       } else {
-//         button.style.display = 'inline-block';
-//       }
-//     });
-//   }
-
-//   // Call the function initially
-//   hideMatchingButton();
-
-//   // Attach the function to the change event of the dropdown
-//   dropdown.addEventListener('change', hideMatchingButton);
-// });
-
-// window.onload = function() {
-// // Set the userInput value
-// const userInputElem = document.getElementById('userInput');
-// userInputElem.value = 'Greet Nick and Adam. Dont Laugh';
-
-// // Call askBot function without passing an event object
-// askBot();
-// };

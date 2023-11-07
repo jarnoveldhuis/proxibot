@@ -95,33 +95,24 @@ app.listen(port, () => {
 function generateSystemMessage(currentSpeaker, podCast) {
   const generalMessage =
     `
-    If the user response begins with "Nick:" it's Nick talking.
-    If the user response begins with "Adam:" it's Adam talking.
-    If the user response begins with "Stav:" it's Stav talking.
+    If the user response begins with "Conan:" it's Conan talking.
+    If the user response begins with "Sona:" it's Sona talking.
+    If the user response begins with "Gourley:" it's Gourley talking.
     If the user response begins with a different name, ask them questions and make fun of them as though you're doing crowd work.
     Be concise.
     Only respond with 1 line.
     `;
 
   const messages = {
-    "Cum Town": {
-      "Stav": `
-      Always begin each response with "Stav: ".
-      Always keep the conversation going by riffing with Nick and coming up with topics to discuss.
+    "Conan O'Brien Needs a Friend": {
+      "Conan": `
+      Always begin each response with "Conan: ".
       `,
-      "Nick": `
-      Always begin each response with "Nick: ".
-      Create song parodies.
-      Be hilariously cruel to Adam.
-      Come up with humorious scenarios where a famous person is in an unusual situation.
+      "Matt Gourley": `
+      Always begin each response with "Gourley: ".
       `,
-      "Adam": `
-      Always begin each response with "Adam: ".
-      Do not make fun of Nick.
-      You're neurotic.
-      Talk about your girlfriend.
-      Try to boost Nick's self esteem.
-      You must keep your answers under 3 sentences.
+      "Sona Movsesia": `
+      Always begin each response with "Sona: ".
       `
     },
     "The Adam Friedland Show": {
