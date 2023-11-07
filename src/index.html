@@ -26,7 +26,7 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="StavBot-GPT" />
+  <meta property="og:title" content="ProxiBot" />
   <meta property="og:description" content="What's going on boys?" />
   <meta property="og:image" content="/img/hellopreview.png" />
   <meta property="twitter:image" content="/img/hellopreview.png" />
@@ -55,7 +55,7 @@
     </div>
 
     <div class="bot-container">
-      <img id="botImage" src="/img/Adam/neutral.svg" alt="cumBot" />
+      <img id="botImage" src="/img/Interviewer/neutral.svg" alt="cumBot" />
     </div>
 
     <div class="input-container">
@@ -65,9 +65,8 @@
         <div class="submitAs">
           <div class="input-group input-group-sm mb-3 ">
             <select class="form-select" aria-label=" select" id="submitAs" name="as">
-              <option value="Conan">Conan</option>
-              <option value="Gourley">Gourley</option>
-              <option value="Sona">Sona</option>
+              <option value="Interviewer">Interviewer</option>
+              <option value="Interviewee">Interviewee</option>
             </select>
             <br>
             <input class="userInput" id="userInput" type="text" name="name" placeholder="Say something...">
@@ -77,9 +76,8 @@
         To:
         <span id="newButtonPlaceholder"></span>
         <div class="btn-group" id="submitTo" role="group">
-          <input class="btn btn-outline-dark btn-sm" type="submit" name="go" value="Conan">
-          <input class="btn btn-outline-dark btn-sm" type="submit" name="go" value="Gourley">
-          <input class="btn btn-outline-dark btn-sm " type="submit" name="go" value="Sona">
+          <input class="btn btn-outline-dark btn-sm" type="submit" name="go" value="Interviewer">
+          <input class="btn btn-outline-dark btn-sm" type="submit" name="go" value="Interviewee">
           <!-- <input class="btn btn-outline-dark btn-sm " type="submit" name="go" value="General"> -->
         </div>
         <button class="btn" id="ttsButton" type="button" aria-label="Toggle sound">
@@ -103,8 +101,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Podcast
-          <select class="form-select" aria-label=" select" id="podCast" name="as">
+          Context
+          <select class="form-select" aria-label=" select" id="context" name="as">
+            <option value="Job Interview">Job Interview</option>
             <option value="Conan O'Brien Needs a Friend">Conan O'Brien Needs a Friend</option>
             <option value="The Adam Friedland Show">The Adam Friedland Show Podcast</option>
           </select>

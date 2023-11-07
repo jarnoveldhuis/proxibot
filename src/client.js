@@ -6,10 +6,10 @@ const laughLength = 2000;
 
 
 let submitTo = "";
-let avatar = "Adam";
-let transcriptText = 'Podcast Introduction.';
+let context = document.getElementById('context').value;
+let avatar = "Interviewee";
+let transcriptText = `${context} Introduction.`;
 let submitAs = document.getElementById('submitAs').value;
-let podCast = document.getElementById('podCast').value;
 let laugh
 let laughs
 let radomLaugh
@@ -27,7 +27,7 @@ function askBot(event) {
   isRequestPending = true;
   submitTo = event instanceof Event ? event.submitter.value : null;
 
-  if (submitTo === "Conan" || submitTo === "Gourley" || submitTo === "Sona") {
+  if (submitTo === "Interviewer" || submitTo === "Interviewee") {
     avatar = submitTo;
     disable = avatar;
   }
@@ -111,7 +111,7 @@ function askBot(event) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ question: userInputValue, podCast: podCast, transcript: transcriptText, submitTo: submitTo })
+    body: JSON.stringify({ question: userInputValue, context: context, transcript: transcriptText, submitTo: submitTo })
   })
     .then(response => response.json())
     .then(data => {
@@ -141,7 +141,7 @@ function askBot(event) {
       askBot.disabled = false;
       disabled = avatar;
 
-      if (avatar != "Conan" && avatar != "Gourley" && avatar != "Sona") {
+      if (avatar != "Interviewer" && avatar != "Interviewee") {
         avatar = "Guest";
 
         // Select all submit buttons
@@ -198,9 +198,8 @@ function appendToTranscript(content, audioUrl) {
   const newContent = content.replace(/<br>/g, '\n'); // Replace <br> tags with newline characters
 
   // Highlight specific words
-  content = content.replace(/(Sona:)/g, '<span class="sona">$1</span>');
-  content = content.replace(/(Gourley:)/g, '<span class="gourley">$1</span>');
-  content = content.replace(/(Conan:)/g, '<span class="conan">$1</span>');
+  content = content.replace(/(Interviewer:)/g, '<span class="sona">$1</span>');
+  content = content.replace(/(Interviewee:)/g, '<span class="gourley">$1</span>');
 
   // Generate unique IDs for the audio controls
   let audioControlsHtml = '';
@@ -332,7 +331,7 @@ function extractName(userMessage) {
 
 function updateAvatar(submit, id) {
   submit = document.getElementById(id).value
-  if (submit === "Sona" || submit === "Conan" || submit === "Gourley") {
+  if (submit === "Interviewer" || submit === "Interviewee") {
     avatar = document.getElementById(id).value;
   }
   else if (submit === "All") {
@@ -449,7 +448,7 @@ document.getElementById('userInput').addEventListener('keypress', function () {
 
 document.getElementById('submitAs').addEventListener('change', function () {
   updateAvatar(submitAs, 'submitAs');
-  document.getElementById('prompt').textContent = data.answer;
+  // document.getElementById('prompt').textContent = data.answer;
   botResponse.textContent = document.getElementById('userInput').value;
   document.getElementById('botImage').src = "/img/" + avatar + "/neutral.svg";
   toggleResponseContainer();
@@ -488,7 +487,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  const podcastDropdown = document.getElementById('podCast');
+  const contextDropdown = document.getElementById('context');
   const stavCheckbox = document.getElementById('btncheck3');
   const stavButton = document.querySelector('label[for="btncheck3"]');
   const submitToButtonGroup = document.getElementById('submitTo');
@@ -522,18 +521,18 @@ document.addEventListener('DOMContentLoaded', function () {
     if (stavSubmitButton) submitToButtonGroup.removeChild(stavSubmitButton);
   }
 
-  podcastDropdown.addEventListener('change', function () {
+  contextDropdown.addEventListener('change', function () {
     document.getElementById('prompt').textContent = ''
-    if (podcastDropdown.value === 'Cum Town') {
+    if (contextDropdown.value === 'Job Interview') {
       addStav();
       transcript.innerHTML = ''
-      transcriptText = 'Introduce the episode.'
-      podCast = document.getElementById('podCast').value;
-    } else if (podcastDropdown.value === 'The Adam Friedland Show') {
+      transcriptText = 'Begin the Interview.'
+      context = document.getElementById('context').value;
+    } else if (contextDropdown.value === 'The Adam Friedland Show') {
       removeStav();
       transcript.innerHTML = ''
       transcriptText = 'Introduce the episode'
-      podCast = document.getElementById('podCast').value;
+      context = document.getElementById('context').value;
     }
   });
 });
@@ -588,13 +587,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  const podcastDropdown = document.getElementById('podCast');
+  const contextDropdown = document.getElementById('context');
   const stavCheckbox = document.getElementById('btncheck3');
   const stavButton = document.querySelector('label[for="btncheck3"]');
   const submitToButtonGroup = document.getElementById('submitTo');
 
-  podcastDropdown.addEventListener('change', function () {
-    if (podcastDropdown.value === 'Cum Town') {
+  contextDropdown.addEventListener('change', function () {
+    if (contextDropdown.value === 'Cum Town') {
       // Check Stav's checkbox and show button if Cum Town is selected
       stavCheckbox.checked = true;
       stavButton.classList.remove('disabled');
@@ -608,7 +607,7 @@ document.addEventListener('DOMContentLoaded', function () {
         stavSubmitButton.className = 'btn btn-outline-dark btn-sm';
         submitToButtonGroup.appendChild(stavSubmitButton);
       }
-    } else if (podcastDropdown.value === 'The Adam Friedland Show') {
+    } else if (contextDropdown.value === 'The Adam Friedland Show') {
       // Uncheck Stav's checkbox and hide button if TAFS is selected
       stavCheckbox.checked = false;
       stavButton.classList.add('disabled');

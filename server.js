@@ -26,7 +26,7 @@ app.use(express.static('src'));  // Update the path accordingly
 // 3. VARIABLES
 let currentSpeaker = ""; // default speaker
 console.log(currentSpeaker)
-let previousAssistantMessage = "Start the podcast";  // Starting message
+let previousAssistantMessage = "Start the context";  // Starting message
 const ELEVENLABS_ENDPOINTS = {
   'Adam': 'https://api.elevenlabs.io/v1/text-to-speech/lj8oyquj3C1V08Xs4x9f',
   'Stav': 'https://api.elevenlabs.io/v1/text-to-speech/g11iLvGRfVTIS78ofuHa',
@@ -67,13 +67,13 @@ app.post('/synthesize', async (req, res) => {
 
 app.post('/ask', async (req, res) => {
   try {
-    const { question, podCast, submitTo, transcript } = req.body;
-    if (!question || !podCast || !submitTo || !transcript) {
+    const { question, context, submitTo, transcript } = req.body;
+    if (!question || !context || !submitTo || !transcript) {
       return res.status(400).send({ error: 'Missing required fields' });
     }
 
     currentSpeaker = submitTo;
-    const systemMessage = generateSystemMessage(currentSpeaker, podCast);
+    const systemMessage = generateSystemMessage(currentSpeaker, context);
     const userMessage = `Respond with the next line of this transcript.\n${transcript}`;
 
     const payload = createPayload(systemMessage, previousAssistantMessage, userMessage);
@@ -92,7 +92,7 @@ app.listen(port, () => {
 });
 
 // 5. HELPER FUNCTIONS
-function generateSystemMessage(currentSpeaker, podCast) {
+function generateSystemMessage(currentSpeaker, context) {
   const generalMessage =
     `
     If the user response begins with "Conan:" it's Conan talking.
@@ -104,6 +104,14 @@ function generateSystemMessage(currentSpeaker, podCast) {
     `;
 
   const messages = {
+    "Job Interview": {
+      "Interviewer": `
+      Always begin each response with "Interviewer: ".
+      `,
+      "Interviewee": `
+      Always begin each response with "Interviewee: ".
+      `
+    },
     "Conan O'Brien Needs a Friend": {
       "Conan": `
       Always begin each response with "Conan: ".
@@ -128,7 +136,7 @@ function generateSystemMessage(currentSpeaker, podCast) {
       Always begin each response with "Nick: ".
       You are stressed out from working very hard on the Adam Friedland tv show.
       You are deeply annoyed by everything that Adam does.
-      You hate podcasting.
+      You hate contexting.
       You say "Huh" a lot and mumble to yourself.
       You hate your listeners.
       `,
@@ -146,12 +154,12 @@ function generateSystemMessage(currentSpeaker, podCast) {
     }
   };
 
-  const podCastMessages = messages[podCast] || {};
-  const speakerMessage = podCastMessages[currentSpeaker] || `You are just a guest on the show. Try your best to fit in by saying things that could ruin your career.
+  const contextMessages = messages[context] || {};
+  const speakerMessage = contextMessages[currentSpeaker] || `You are just a guest on the show. Try your best to fit in by saying things that could ruin your career.
       Always begin each response with "${currentSpeaker}: ".`;
 
   const message = `
-    Your name is ${currentSpeaker} and you are podcasting with the hosts of ${podCast}.
+    Your name is ${currentSpeaker} and you are contexting with the hosts of ${context}.
     ${generalMessage}
     ${speakerMessage}
   `;
