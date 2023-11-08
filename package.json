@@ -1,20 +1,17 @@
 {
-  "name": "proxibot",
+  "name": "jarnoveldhuis",
   "version": "1.0.0",
-  "description": "Approximate Proxy",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jarnoveldhuis/proxibot.git"
-  },
-  "author": "Jarno Veldhuis",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jarnoveldhuis/proxibot/issues"
-  },
-  "homepage": "https://github.com/jarnoveldhuis/proxibot#readme"
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  }
 }
