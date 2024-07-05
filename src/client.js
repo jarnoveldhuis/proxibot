@@ -19,7 +19,7 @@ let transcriptButtonHtml = `<button class="btn" id="showFormBtn" data-bs-toggle=
 <i class="fas fa-file-alt"></i>
 </button>`
 
-window.location.replace(https://jarno.ego-proxy.com/interview');
+window.location.replace('https://jarno.ego-proxy.com/interview');
 function askBot(event) {
   if (isRequestPending) return;
 
